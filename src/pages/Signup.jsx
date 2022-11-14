@@ -46,7 +46,7 @@ function Signup() {
     };
 
     try {
-      await signupService(newUser).then((response) => {
+      await signupService(newUser).then((response) => { //quitar el .then
         localStorage.setItem("authToken", response.data.authToken)
         authenticaUser()
         navigate("/profile")
@@ -103,7 +103,7 @@ function Signup() {
         />
         <br />
         <label form="userImage">Imagen de Perfil</label>
-        <input type="file" name="userImage" onChange={handleUserImageChange} />
+        <input type="file"  onChange={handleUserImageChange} />
         
         <br />
         <button type="submit">Signup</button>
@@ -111,7 +111,7 @@ function Signup() {
         {errorMessage !== "" ? <p>{errorMessage}</p> : null}
       </form>
 
-      <img src={userImage} alt="lalala" />
+     
     </div>
   );
 }

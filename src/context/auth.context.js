@@ -6,7 +6,7 @@ const AuthContext = createContext()
 
 function AuthWrapper(props){
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false) 
     const [ user, setUser] = useState(null)
     const [isFetching, setIsFetching] = useState(true)
 
@@ -21,13 +21,13 @@ function AuthWrapper(props){
             const response = await verifyService() 
             console.log(response)
             // a partir de aqui el Token está validado en Fronted
-            setIsLoggedIn(true)
+            setIsLoggedIn(true) 
             setUser(response.data)
             setIsFetching(false)
 
         } catch(error){
             console.log(error)
-            setIsLoggedIn(false)
+            setIsLoggedIn(false) 
             setUser(null)
             setIsFetching(false)
         }

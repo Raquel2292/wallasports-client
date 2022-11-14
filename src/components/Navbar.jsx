@@ -31,6 +31,27 @@ function Navbar() {
           <NavLink to="/profile" className={asignClassName}>
             <button>Perfíl</button>
           </NavLink>
+
+          <NavLink to="/productsList" className={asignClassName}>
+            <button>Lista de Productos</button>
+          </NavLink>
+
+          <NavLink to="/details" className={asignClassName}>
+            <button>Detalles</button>
+          </NavLink>
+
+          <NavLink to="/upload" className={asignClassName}>
+            <button>Subir Producto</button>
+          </NavLink>
+
+          <NavLink to="/favorites" className={asignClassName}>
+            <button>Favoritos</button>
+          </NavLink>+
+
+          <NavLink to="/list" className={asignClassName}>
+            <button>Lista</button>
+          </NavLink>
+         
           <span className="nav-inactive">
             <button onClick={handleLogout}>Cerrar Sesión</button>
           </span>
