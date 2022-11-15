@@ -1,52 +1,50 @@
-import React from 'react'
-import { useEffect } from "react"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
-import { getAllProductService } from "../services/auth.services"
+import { getAllProductService } from "../services/product.services";
+import Product from "../components/Product";
 
 function ProductsList() {
-
-  const [ list, setList ] = useState([])
-  const [isFetching, setIsFetching ] = useState(true)
+  const [list, setList] = useState([]);
+  const [isFetching, setIsFetching] = useState(true);
+  const { type } = useParams();
 
   //Llamo a la API
   useEffect(() => {
-    productData()
-  }, [])
+    productData();
+  }, []);
 
   const productData = async () => {
     try {
-      const response = await getAllProductService()
+      const response = await getAllProductService(type);
       //guardo la información en el estado
-      console.log(response)
-      setList(response.data)
-      setIsFetching(false)
-    }catch(error){
-      console.log(error)
+      console.log("Listado de productos", response);
+      setList(response.data);
+      setIsFetching(false);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   //cluasula de guardia
-  if (isFetching === true){
-    return <h4>....searching</h4>
+  if (isFetching === true) {
+    return <h4>....searching</h4>;
   }
   return (
     <div>
+      <h1>Estás en la lista de productos</h1>
 
-    <div actualizarLista={productData}/>
-
-        <h1>Estas en la lista de productos</h1>
-
-        {list.map((eachProduct) => {
-          return (
-            <p key={eachProduct._id}>
-              <Link to={'/products/${eachProduct._id'}>{eachProduct.name}</Link>
-            </p>
-          )
-        })}
+      {list.map((eachProduct) => {
+        return (
+          <Link to={`/products/detail/${eachProduct._id}`}>
+            <Product detail={false} product={eachProduct} />
+          </Link>
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default ProductsList
+export default ProductsList;

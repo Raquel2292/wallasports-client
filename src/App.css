@@ -2,3 +2,13 @@
   text-align: center;
 }
 
+.card {
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 20px 0;
+}
+
+.card img {
+  width: 300px;
+}

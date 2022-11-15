@@ -8,6 +8,7 @@ function Profile() {
   return (
     <div>
         <h4>Este es tu Perfil</h4>
+        
     </div>
   )
 }

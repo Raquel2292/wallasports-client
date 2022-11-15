@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import {uploadProduct} from '../services/auth.services'
+import {uploadProduct} from '../services/product.services'
 import { useNavigate } from "react-router-dom";
 
 
@@ -9,13 +9,13 @@ function Upload() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [type, setType] = useState("");
-  const [reserved, setReserved] = useState(false);
   const [imageProduct, setImageProduct] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
   const handlePriceChange = (e) => setPrice(e.target.value);
+  const handleTypeChange = (e) => setType(e.target.value);
   
 
   const handleImageProductChange = (e) => {
@@ -33,25 +33,34 @@ function Upload() {
   
   const handleNewProduct = async (event) => {
     event.preventDefault()
-    const newProduct = {
-      name, 
-      description,
-      price,
-      type,
-      reserved,
-      imageProduct
+
+    //Si algún campo no está relleno, no sigue la función, le lanza error con mensaje. Del contrario puede subir el producto
+    if (!name || !description || !price || !type || !imageProduct) {
+      setErrorMessage("Todos los campos son obligatorios");
     }
-    try{
-      await uploadProduct(newProduct)
-    }catch (error){
-      console.log(error.response.status)
-      console.log(error.response.data.errorMessage)
-      if (error.response && error.response.status === 400) {
-        // si el error es de tipo 400 me quedo en el componente y muestro el mensaje de error
-        setErrorMessage(error.response.data.errorMessage);
-      } else {
-        // si el error es otro (500) entonces si redirecciono a /error
-        navigate("/error");
+    else {
+      const newProduct = {
+        name, 
+        description,
+        price,
+        type,
+        imageProduct
+      }
+      try{
+        console.log(newProduct)
+        const response = await uploadProduct(newProduct)
+        console.log("Producto creado", response);
+        navigate(`/products/detail/${response.data._id}`)
+      }catch (error){
+        console.log(error.response.status)
+        console.log(error.response.data.errorMessage)
+        if (error.response && error.response.status === 400) {
+          // si el error es de tipo 400 me quedo en el componente y muestro el mensaje de error
+          setErrorMessage(error.response.data.errorMessage);
+        } else {
+          // si el error es otro (500) entonces si redirecciono a /error
+          navigate("/error");
+        }
       }
     }
   }
@@ -87,8 +96,19 @@ function Upload() {
           onChange={handlePriceChange}
         />
 
+        
         <br />
-        <label form="imageProduct">Imagen del Producto</label>
+        <label htmlFor="typeProduct">Tipo de Producto</label>
+        <select value={type} onChange={handleTypeChange}>
+          <option value="">Elige el tipo del producto</option>
+          <option value="clothing">Clothing</option>
+          <option value="material">Material</option>
+        </select>
+        <br/>
+        
+
+        <br />
+        <label htmlFor="imageProduct">Imagen del Producto</label>
         <input
           type="file"
           name="imageProduct"
@@ -98,6 +118,9 @@ function Upload() {
         
 
         <br />
+
+        {errorMessage}
+
         <button type="submit">Subir Producto</button>
       </form>
     </div>

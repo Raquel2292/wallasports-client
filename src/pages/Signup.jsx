@@ -46,7 +46,7 @@ function Signup() {
     };
 
     try {
-      await signupService(newUser).then((response) => { //quitar el .then
+      await signupService(newUser).then((response) => { 
         localStorage.setItem("authToken", response.data.authToken)
         authenticaUser()
         navigate("/profile")

@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getProductDetailsService, updateProductService } from '../services/auth.services'
+import { getProductDetailsService, updateProductService } from '../services/product.services'
 
 
 function ProductEdit() {
@@ -10,9 +10,9 @@ function ProductEdit() {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const [ nameImput, setNameInput ] = useState("")
+  const [ nameInput, setNameInput ] = useState("")
   const [ descriptionInput, setDescriptionInput ] = useState("")
-  const [ isReservedInput, setIsReservedInput ] = useState(false)
+  const [ reservedInput, setReservedInput ] = useState(false)
 
   useEffect(() => {
     getData()
@@ -26,7 +26,7 @@ function ProductEdit() {
       // que debo hacer para actualizar los campos con response?
       setNameInput(response.data.name)
       setDescriptionInput(response.data.description)
-      setIsReservedInput(response.data.isReserved)
+      setReservedInput(response.data.isReserved)
     } catch (error) {
       navigate("/error")
     }
@@ -34,7 +34,7 @@ function ProductEdit() {
 
   const nameChange = (event) => setNameInput(event.target.value)
   const descriptionChange = (event) => setDescriptionInput(event.target.value)
-  const isReservedChange = (event) => setIsReservedInput(event.target.checked)
+  const reservedChange = (event) => setReservedInput(event.target.checked)
 
   const handleUpdate = async (event) => {
     event.preventDefault()
@@ -42,15 +42,15 @@ function ProductEdit() {
       
       // recopilamos los valor a actualizar
       const updatedProduct = {
-        name: setNameInput,
+        name: nameInput,
         description: descriptionInput,
-        isReserved: isReservedInput
+        reserved: reservedInput
       }
       // llamamos al servicio de update pasando el Id y la data a actualizar
       await updateProductService(id, updatedProduct)
 
       // redireccionar
-      navigate("/todos")
+      navigate(`/detail/${id}`)
 
     } catch (error) {
       navigate("/error")
@@ -65,13 +65,13 @@ function ProductEdit() {
       <form>
 
         <label htmlFor="name">Nombre:</label>
-        <input type="text" name="name" value={nameImput} onChange={nameChange}/>
+        <input type="text" name="name" value={nameInput} onChange={nameChange}/>
         <br />
         <label htmlFor="description">Descripción</label>
         <input type="text" name="description" value={descriptionInput} onChange={descriptionChange}/>
         <br />
         <label htmlFor="isReserved">¿Esta Reservado?</label>
-        <input type="checkbox" name="isReserved" checked={isReservedInput} onChange={isReservedChange}/>
+        <input type="checkbox" name="isReserved" checked={reservedInput} onChange={reservedChange}/>
         <br />
         <button onClick={handleUpdate}>Editar Producto</button>
       </form>
