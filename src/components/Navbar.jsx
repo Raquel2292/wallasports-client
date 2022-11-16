@@ -44,6 +44,10 @@ function Navbar() {
             <button>Mis Productos</button>
           </NavLink>
 
+          <NavLink to="/messages" className={asignClassName}>
+            <button>Mis Mensajes</button>
+          </NavLink>
+
          
           <span className="nav-inactive">
             <button onClick={handleLogout}>Cerrar Sesión</button>

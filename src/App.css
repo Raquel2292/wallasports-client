@@ -29,3 +29,9 @@
   color: blue;
   font-family: sans-serif;
 }
+
+.message {
+  border: 1px solid grey;
+  margin: 20px;
+  padding: 20px;
+}

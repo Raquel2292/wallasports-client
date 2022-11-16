@@ -7,6 +7,7 @@ import {
   addFavorite,
   deleteFavorite,
 } from "../services/product.services";
+import { sendMessage } from "../services/messages.services";
 import Product from "../components/Product";
 
 function Detail() {
@@ -17,11 +18,15 @@ function Detail() {
   // 1. crear el estado donde estaran los detalles
   const [detail, setDetail] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
+  const [textInput, setTextInput] = useState("");
+  const [sendedMessage, setSendedMessage] = useState(false);
 
   // 2. buscar la informacion del servidor/bd con el useEffect
   useEffect(() => {
     getData();
   }, []);
+
+  const textChange = (event) => setTextInput(event.target.value);
 
   const getData = async () => {
     try {
@@ -65,6 +70,23 @@ function Detail() {
     }
   };
 
+  const sendNewMessage = async (event) => {
+    event.preventDefault();
+    try {
+      const newMessage = {
+        text: textInput,
+      };
+      //a sendMessage le envio el id del Producto, y el nuevo mensaje creado
+      await sendMessage(id, newMessage);
+      //vacía el campo del textarea
+      setTextInput("")
+      setSendedMessage(true); //pone la variable a true cuando el mensaje se ha enviado
+    } catch (error) {
+      console.log(error)
+      navigate("/error");
+    }
+  };
+
   // 4. clausula de guardia de buscando
   if (isFetching === true) {
     return <h3>...buscando</h3>;
@@ -84,11 +106,26 @@ function Detail() {
           </Link>
         </div>
       ) : (
-        <button onClick={handleFavorites}>
-          {user.user.favorites.indexOf(id) === -1  //indexOf me busca el indice del id, dentro de favorites
-            ? "Añadir a favoritos"
-            : "Eliminar de favoritos"}
-        </button>
+        <div>
+          <button onClick={handleFavorites}>
+            {user.user.favorites.indexOf(id) === -1 //indexOf me busca el indice del id, dentro de favorites
+              ? "Añadir a favoritos"
+              : "Eliminar de favoritos"}
+          </button>
+
+          <form>
+            <label htmlFor="text">Puedes dejar un mensaje al propietario</label>
+            <textarea
+              type="text"
+              name="text"
+              value={textInput}
+              onChange={textChange}
+            />
+            <button onClick={sendNewMessage}>Enviar</button>
+            {/* Cuando la variable cambie a true, muestrame este mensaje */}
+            {sendedMessage && <p>Mensaje enviado</p>}
+          </form>
+        </div>
       )}
     </div>
   );

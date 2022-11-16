@@ -16,6 +16,7 @@ import Favorites from './pages/Favorites';
 import MyProducts from './pages/MyProducts';
 import EditProduct from './pages/EditProduct';
 import EditProfile from './pages/EditProfile';
+import Messages from './pages/Messages';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
     <Route path='/my-products' element= {<IsPrivate> <MyProducts/> </IsPrivate>}/>
     <Route path='/edit-products/:id' element= {<IsPrivate> <EditProduct/> </IsPrivate>}/>
     <Route path='/edit-profile' element= {<IsPrivate> <EditProfile/> </IsPrivate>}/>
+    <Route path='/messages' element= {<IsPrivate> <Messages/> </IsPrivate>}/>
 
 
 
