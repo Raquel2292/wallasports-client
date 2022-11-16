@@ -22,9 +22,9 @@ function Profile() {
     }
   };
 
-  const deleteProfile = async () => {
+  const deleteUser = async () => {
     try {
-      await deleteProfile(user.id);
+      await deleteProfile(user._id);
       navigate("/login");
     } catch (error) {
       navigate("/error");
@@ -39,7 +39,7 @@ function Profile() {
         <p>Nombre: {user.name}</p>
         <img src={user.userImage} alt={user.name} width="100px"/>
       </div>
-      <button onClick={deleteProfile}>Eliminar Perfil</button>
+      <button onClick={deleteUser}>Eliminar Perfil</button>
       <Link to={"/edit-profile"}>
             <button>Editar Perfil</button>
           </Link>

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 function Home() {
   return (
-    <div>
+    <div className='h1-home'>
       <h1>Estas en home</h1>
 
-      <Link to="/productsList/material">Material</Link>
-      <Link to="/productsList/clothing">Clothing</Link>
+      <Link className='card-home' to="/productsList/material">Material</Link>
+      <Link className='card-home' to="/productsList/clothing">Clothing</Link>
 
 
     </div>
