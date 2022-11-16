@@ -38,7 +38,7 @@ function ProductsList() {
 
       {list.map((eachProduct) => {
         return (
-          <Link to={`/products/detail/${eachProduct._id}`}>
+          <Link to={`/products/detail/${eachProduct._id}`} key={eachProduct._id}>
             <Product detail={false} product={eachProduct} />
           </Link>
         );

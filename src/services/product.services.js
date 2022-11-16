@@ -24,8 +24,8 @@ const getProductDetailsService = (id) => {
     return service.get(`/products/owner/${userId}`)
   }
 
-  const getFavorites = (favorites) => {
-    return service.get(`/products/favorites/${favorites}`) //no me entiende el favorites entre llaves como un array
+  const getFavorites = () => {
+    return service.get(`/products/favorites`)
   }
 
   const addFavorite = (productId) => {

@@ -15,6 +15,7 @@ import Upload from './pages/Upload';
 import Favorites from './pages/Favorites';
 import MyProducts from './pages/MyProducts';
 import EditProduct from './pages/EditProduct';
+import EditProfile from './pages/EditProfile';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
     <Route path='/favorites' element= {<IsPrivate> <Favorites/> </IsPrivate>}/>
     <Route path='/my-products' element= {<IsPrivate> <MyProducts/> </IsPrivate>}/>
     <Route path='/edit-products/:id' element= {<IsPrivate> <EditProduct/> </IsPrivate>}/>
+    <Route path='/edit-profile' element= {<IsPrivate> <EditProfile/> </IsPrivate>}/>
 
 
 

@@ -16,9 +16,9 @@ function Favorites() {
 
   const getList = async () => {
     try {
-      const response = await getFavorites(user.user.favorites); //le paso un array de favoritos, pero no me lo reconoce
+      const response = await getFavorites(); 
       //guardo la información en el estado
-      console.log("Listado de productos", response);
+      console.log("Listado de favoritos", response);
       setList(response.data);
       setIsFetching(false);
     } catch (error) {
@@ -36,7 +36,7 @@ function Favorites() {
 
       {list.map((eachProduct) => {
         return (
-          <Link to={`/products/detail/${eachProduct._id}`}>
+          <Link to={`/products/detail/${eachProduct._id}`} key={eachProduct._id}>
             <Product detail={false} product={eachProduct} />
           </Link>
         );

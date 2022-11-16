@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
-import { verifyService } from "../services/auth.services";
-import { useNavigate } from "react-router-dom";
+import { verifyService, deleteProfile } from "../services/auth.services";
+import { useNavigate, Link } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState("");
@@ -22,6 +22,16 @@ function Profile() {
     }
   };
 
+  const deleteProfile = async () => {
+    try {
+      await deleteProfile(user.id);
+      navigate("/login");
+    } catch (error) {
+      navigate("/error");
+    }
+  };
+
+
   return (
     <div>
       <div>
@@ -29,8 +39,10 @@ function Profile() {
         <p>Nombre: {user.name}</p>
         <img src={user.userImage} alt={user.name} width="100px"/>
       </div>
-      <button>Eliminar usuario</button>
-      <button>Editar perfil</button>
+      <button onClick={deleteProfile}>Eliminar Perfil</button>
+      <Link to={"/edit-profile"}>
+            <button>Editar Perfil</button>
+          </Link>
     </div>
   );
 }
