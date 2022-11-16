@@ -16,10 +16,11 @@ function AuthWrapper(props){
 
     const authenticaUser =  async () => {
         setIsFetching(true)
+        console.log("autentica")
         //ejecutar para validar el token del usuario y actualizar los estados
         try{
             const response = await verifyService() 
-            console.log(response)
+            console.log("verifyService", response)
             // a partir de aqui el Token está validado en Fronted
             setIsLoggedIn(true) 
             setUser(response.data)

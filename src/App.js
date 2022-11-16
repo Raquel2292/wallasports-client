@@ -13,7 +13,8 @@ import ProductsList from './pages/ProductsList';
 import Detail from './pages/Detail';
 import Upload from './pages/Upload';
 import Favorites from './pages/Favorites';
-import List from './components/List';
+import MyProducts from './pages/MyProducts';
+import EditProduct from './pages/EditProduct';
 
 
 function App() {
@@ -34,6 +35,10 @@ function App() {
     <Route path="/products/detail/:id" element= { <IsPrivate> <Detail/> </IsPrivate> } />
     <Route path="/upload" element= { <IsPrivate> <Upload/> </IsPrivate> } />
     <Route path='/favorites' element= {<IsPrivate> <Favorites/> </IsPrivate>}/>
+    <Route path='/my-products' element= {<IsPrivate> <MyProducts/> </IsPrivate>}/>
+    <Route path='/edit-products/:id' element= {<IsPrivate> <EditProduct/> </IsPrivate>}/>
+
+
 
     <Route path="/error" element= { <Error/>}/>
     <Route path="/*" element= { <NotFound/>}/>

@@ -39,6 +39,11 @@ function Navbar() {
           <NavLink to="/favorites" className={asignClassName}>
             <button>Favoritos</button>
           </NavLink>
+
+          <NavLink to="/my-products" className={asignClassName}>
+            <button>Mis Productos</button>
+          </NavLink>
+
          
           <span className="nav-inactive">
             <button onClick={handleLogout}>Cerrar Sesión</button>
