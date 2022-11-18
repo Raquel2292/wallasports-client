@@ -2,10 +2,13 @@ import { React, useState, useContext } from "react";
 import { uploadProduct } from "../services/product.services";
 import { useNavigate } from "react-router-dom";
 import { uploadProductImage } from "../services/upload.services";
-import { AuthContext } from "../context/auth.context"
+import { AuthContext } from "../context/auth.context";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function Upload() {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -20,14 +23,20 @@ function Upload() {
   const handlePriceChange = (e) => setPrice(e.target.value);
   const handleTypeChange = (e) => setType(e.target.value);
 
-
   //recibo un evento porque voy a meter la función en el formulario
 
   const handleNewProduct = async (event) => {
     event.preventDefault();
 
     //Si algún campo no está relleno, no sigue la función, le lanza error con mensaje. Del contrario puede subir el producto
-    if (!name || !description || !price || !type || !productImage || !user.user._id) {
+    if (
+      !name ||
+      !description ||
+      !price ||
+      !type ||
+      !productImage ||
+      !user.user._id
+    ) {
       setErrorMessage("Todos los campos son obligatorios");
     } else {
       const newProduct = {
@@ -37,7 +46,7 @@ function Upload() {
         type,
         productImage,
         reserved: false,
-        owner: user.user._id
+        owner: user.user._id,
       };
       try {
         console.log("producto que envío al back", newProduct);
@@ -77,61 +86,67 @@ function Upload() {
     }
   };
 
- 
-
   return (
     <div>
-      <h1>Sube tus productos aquí</h1>
+      <h1 className="pageTitle" >¿Qué vas a ofrecernos hoy?</h1>
 
-      <form onSubmit={handleNewProduct}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
-        />
-        <br />
-        <label htmlFor="description">Description:</label>
-        <textarea
-          type="text"
-          name="description"
-          value={description}
-          onChange={handleDescriptionChange}
-        />
+      <Form className="app-form" onSubmit={handleNewProduct}>
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label htmlFor="name">Name:</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </Form.Group>
 
-        <br />
-        <label htmlFor="price">Price:</label>
-        <input
-          type="number"
-          name="price"
-          value={price}
-          onChange={handlePriceChange}
-        />
+        <Form.Group className="mb-3" controlId="formBasicDescription">
+          <Form.Label htmlFor="description">Description:</Form.Label>
+          <Form.Control as="textarea"
+            type="text"
+            name="description"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
+        </Form.Group>
 
-        <br />
-        <label htmlFor="typeProduct">Tipo de Producto</label>
-        <select value={type} onChange={handleTypeChange}>
-          <option value="">Elige el tipo del producto</option>
-          <option value="clothing">Clothing</option>
-          <option value="material">Material</option>
-        </select>
-        <br />
+        <Form.Group className="mb-3" controlId="formBasicPrice">
+          <Form.Label htmlFor="price">Price:</Form.Label>
+          <Form.Control
+            type="number"
+            name="price"
+            value={price}
+            onChange={handlePriceChange}
+          />
+        </Form.Group>
 
-        <br />
-        <label htmlFor="productImage">Imagen</label>
-        <input
-          type="file"
-          name="productImage"
-          onChange={handleUploadImagePrduct}
-        />
+        <Dropdown>
+          <Form.Group className="mb-3" controlId="formBasicTypeProduct">
+            <Form.Label htmlFor="typeProduct">Tipo de Producto</Form.Label>
+            <Form.Select value={type} onChange={handleTypeChange}>
+              <option value="">Elige el tipo del producto</option>
+              <option value="clothing">Clothing</option>
+              <option value="material">Material</option>
+            </Form.Select>
+          </Form.Group>
+        </Dropdown>
 
-        <br />
+        <Form.Group className="mb-3" controlId="formBasicImage">
+          <Form.Label htmlFor="productImage">Imagen</Form.Label>
+          <Form.Control
+            type="file"
+            name="productImage"
+            onChange={handleUploadImagePrduct}
+          />
+        </Form.Group>
 
         {errorMessage}
 
-        <button type="submit">Subir Producto</button>
-      </form>
+        <Button variant="outline-primary" type="submit">
+          Subir Producto
+        </Button>
+      </Form>
     </div>
   );
 }

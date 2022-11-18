@@ -9,6 +9,10 @@ import {
 } from "../services/product.services";
 import { sendMessage } from "../services/messages.services";
 import Product from "../components/Product";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import CardGroup from "react-bootstrap/CardGroup";
+
 
 function Detail() {
   const { id } = useParams();
@@ -95,39 +99,47 @@ function Detail() {
   return (
     <div>
       <h1>Estas en el detalle del producto {detail.name}</h1>
+      <CardGroup>
       <Product detail={true} product={detail} />
+      </CardGroup>
+      <Form className="app-form">
+      <Form.Group className="mb-3" controlId="formBasicName">
 
       {/* si se cumple, coloco los botones, sino no */}
       {user.user._id === detail.owner ? (
         <div>
-          <button onClick={deleteProduct}>Borrar</button>
+          <Button variant="outline-danger" onClick={deleteProduct}>Borrar</Button>
           <Link to={`/edit-products/${id}`}>
-            <button>Editar</button>
+            <Button variant="outline-primary">Editar</Button>
           </Link>
+          
         </div>
       ) : (
         <div>
-          <button onClick={handleFavorites}>
+          <Button variant="outline-danger" onClick={handleFavorites}>
             {user.user.favorites.indexOf(id) === -1 //indexOf me busca el indice del id, dentro de favorites
               ? "Añadir a favoritos"
               : "Eliminar de favoritos"}
-          </button>
+          </Button>
 
-          <form>
-            <label htmlFor="text">Puedes dejar un mensaje al propietario</label>
-            <textarea
+          <Form>
+            <Form.Label htmlFor="text">Puedes dejar un mensaje al propietario</Form.Label>
+            <Form.Control as="textarea"
               type="text"
               name="text"
               value={textInput}
               onChange={textChange}
             />
-            <button onClick={sendNewMessage}>Enviar</button>
+            <Button variant="outline-primary" onClick={sendNewMessage}>Enviar</Button>
             {/* Cuando la variable cambie a true, muestrame este mensaje */}
             {sendedMessage && <p>Mensaje enviado</p>}
-          </form>
+          </Form>
         </div>
       )}
+      </Form.Group>
+      </Form>
     </div>
+    
   );
 }
 

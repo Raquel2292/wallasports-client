@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { verifyService, deleteProfile } from "../services/auth.services";
 import { useNavigate, Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 function Profile() {
   const [user, setUser] = useState("");
@@ -31,18 +32,21 @@ function Profile() {
     }
   };
 
-
   return (
     <div>
-      <div>
-        <h4>Este es tu Perfil</h4>
-        <p>Nombre: {user.name}</p>
-        <img src={user.userImage} alt={user.name} width="100px"/>
+      <div className="profile">
+        <div
+          className="profile-image"
+          style={{ backgroundImage: `url(${user.userImage}` }}
+        ></div>
+        <h4>¡Bienvenido {user.name}!</h4>
       </div>
-      <button onClick={deleteUser}>Eliminar Perfil</button>
+      <Button className="button-profile" variant="outline-danger" onClick={deleteUser}>
+        Eliminar Perfil
+      </Button>
       <Link to={"/edit-profile"}>
-            <button>Editar Perfil</button>
-          </Link>
+        <Button className="button-profile" variant="outline-primary">Editar Perfil</Button>
+      </Link>
     </div>
   );
 }

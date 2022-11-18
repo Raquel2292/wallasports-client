@@ -1,6 +1,6 @@
 
 import './App.css';
-import Navbar from './components/Navbar';
+import NavbarHome from './components/NavbarHome';
 import { Route, Routes } from 'react-router-dom'
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -22,7 +22,7 @@ import Messages from './pages/Messages';
 function App() {
   return (
     <div className="App">
-  <Navbar/>
+  <NavbarHome/>
 
   <Routes>
 

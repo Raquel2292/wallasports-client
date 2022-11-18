@@ -4,6 +4,9 @@ import {
   getProductDetailsService,
   updateProductService,
 } from "../services/product.services";
+import Form from "react-bootstrap/Form";
+import InputGroup from 'react-bootstrap/InputGroup';
+import Button from 'react-bootstrap/Button';
 
 function EditProduct() {
   const { id } = useParams();
@@ -26,7 +29,7 @@ function EditProduct() {
       // que debo hacer para actualizar los campos con response?
       setNameInput(response.data.name);
       setDescriptionInput(response.data.description);
-      setReservedInput(response.data.isReserved);
+      setReservedInput(response.data.reserved);
       setPriceInput(response.data.price);
     } catch (error) {
       navigate("/error");
@@ -62,40 +65,48 @@ function EditProduct() {
     <div>
       <h3>Formulario Editar</h3>
 
-      <form>
-        <label htmlFor="name">Nombre:</label>
-        <input
+      <Form className="app-form">
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label htmlFor="name">Nombre:</Form.Label>
+        <Form.Control 
           type="text"
           name="name"
           value={nameInput}
           onChange={nameChange}
         />
-        <br />
-        <label htmlFor="description">Descripción</label>
-        <textarea
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicName">
+
+        <Form.Label htmlFor="description">Descripción</Form.Label>
+        <Form.Control as="textarea"
           type="text"
           name="description"
           value={descriptionInput}
           onChange={descriptionChange}
         />
-        <br />
-        <label htmlFor="isReserved">¿Esta Reservado?</label>
-        <input
-          type="checkbox"
+        </Form.Group>
+        
+        <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label htmlFor="isReserved">¿Esta Reservado?</Form.Label>
+        <InputGroup.Checkbox aria-label="Checkbox for following text input"
           name="isReserved"
           checked={reservedInput}
           onChange={reservedChange}
         />
-        <br />
-        <label htmlFor="price">Price:</label>
-        <input
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label htmlFor="price">Price:</Form.Label>
+        <Form.Control
           type="number"
           name="price"
           value={priceInput}
           onChange={priceChange}
         />
-        <button onClick={handleUpdate}>Editar Producto</button>
-      </form>
+        </Form.Group>
+        <Button variant="outline-primary" onClick={handleUpdate}>Editar Producto</Button>
+      </Form>
     </div>
   );
 }

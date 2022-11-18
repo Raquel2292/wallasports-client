@@ -13,25 +13,26 @@ function Messages() {
   const getAllMessages = async () => {
     try {
       //busco los mensajes de la BD, y todos los mensajes los guardo en la variable response
-      const response = await getMessages()
-      console.log("Todos los mensajes", response)
+      const response = await getMessages();
+      console.log("Todos los mensajes", response);
       setMessages(response.data); // en la varibale mensajes, guardo todos los mensajes
-      setIsFetching(false)
+      setIsFetching(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   if (isFetching === true) {
-    return <h4>....searching</h4>
+    return <h4>....searching</h4>;
   }
   return (
     <div>
-      <h1>Estos son todos tus mensajes</h1>
+      <h1 className="pageTitle" >📨¡Echa un ojo!📨</h1>
 
       {messages.map((eachMessage) => {
         return (
           <div className="message" key={eachMessage._id}>
+            ✉️
             {eachMessage.text}
           </div>
         );

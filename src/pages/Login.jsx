@@ -3,7 +3,8 @@ import { loginService } from "../services/auth.services";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react"
 import { AuthContext } from "../context/auth.context";
-
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
 function Login() {
@@ -42,7 +43,7 @@ function Login() {
         //guardamos la info de que el usuario se ha logado
         authenticaUser() //invocamos la función de context que valida el Token
         //redireccionar al usuario
-        navigate("/profile")
+        navigate("/")
     } catch(error){
         if (error.response && error.response.status === 400){
             //me quedo en donde estoy (componente) y muestro el mensaje de error
@@ -56,27 +57,31 @@ function Login() {
     <div>
       <h1>Log In</h1>
 
-      <form onSubmit={handleLogin}>
-        <label>Email</label>
-        <input
+      <Form className="app-form" onSubmit={handleLogin}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
           type="email"
           name="email"
           value={email}
           onChange={handleEmailChange}
         />
+        </Form.Group>
 
-        <label>Password</label>
-        <input
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password"
           name="password"
           value={password}
           onChange={handlePasswordChange}
         />
-        <button type="submit">Login</button>
+        </Form.Group>
+        <Button variant="outline-primary" type="submit">Login</Button>
 
         {errorMessage !== "" && <p>{errorMessage}</p>}
 
-      </form>
+      </Form>
     </div>
   );
 }

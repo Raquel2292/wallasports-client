@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { getFavorites } from "../services/product.services";
 import Product from "../components/Product";
+import CardGroup from "react-bootstrap/CardGroup";
+
 
 function Favorites() {
   const { user } = useContext(AuthContext);
@@ -32,15 +34,17 @@ function Favorites() {
   }
   return (
     <div>
-      <h1>Estás en la lista de productos</h1>
+      <h1 className="pageTitle" >¿Qué tenemos por aquí?</h1>
 
+      <CardGroup>
       {list.map((eachProduct) => {
         return (
-          <Link to={`/products/detail/${eachProduct._id}`} key={eachProduct._id}>
+          <Link className="m-4" to={`/products/detail/${eachProduct._id}`} key={eachProduct._id}>
             <Product detail={false} product={eachProduct} />
           </Link>
         );
       })}
+      </CardGroup>
     </div>
   );
 }

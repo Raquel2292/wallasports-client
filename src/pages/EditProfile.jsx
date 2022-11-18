@@ -2,6 +2,8 @@ import {React, useContext, useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import { editProfile, verifyService } from "../services/auth.services";
 import { AuthContext } from "../context/auth.context";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 function EditProfile() {
     const navigate = useNavigate();
@@ -51,26 +53,28 @@ function EditProfile() {
   
     return (
       <div>
-        <h3>Formulario Editar Perfil</h3>
   
-        <form>
-          <label htmlFor="name">Nombre:</label>
-          <input
+        <Form className="app-form">
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label htmlFor="name">Nombre:</Form.Label>
+          <Form.Control
             type="text"
             name="name"
             value={nameInput}
             onChange={nameChange}
           />
-          <br />
-          <label htmlFor="email">Email:</label>
-          <input
+          
+          <Form.Label htmlFor="email">Email:</Form.Label>
+          <Form.Control
             type="text"
             name="email"
             value={emailInput}
             onChange={emailChange}
           />
-          <button onClick={handleUpdate}>Editar Perfil</button>
-        </form>
+          <Button variant="outline-primary" onClick={handleUpdate}>Editar Perfil</Button>
+          </Form.Group>
+        </Form>
+        
       </div>
     );
   }

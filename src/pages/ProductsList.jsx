@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { getAllProductService } from "../services/product.services";
 import Product from "../components/Product";
+import CardGroup from "react-bootstrap/CardGroup";
 
 function ProductsList() {
   const [list, setList] = useState([]);
@@ -33,16 +34,21 @@ function ProductsList() {
     return <h4>....searching</h4>;
   }
   return (
-    <div>
-      <h1>Estás en la lista de productos</h1>
-
-      {list.map((eachProduct) => {
-        return (
-          <Link to={`/products/detail/${eachProduct._id}`} key={eachProduct._id}>
-            <Product detail={false} product={eachProduct} />
-          </Link>
-        );
-      })}
+    <div className="products-list">
+      <h1 className="pageTitle" >Estás en la lista de productos</h1>
+      <CardGroup>
+        {list.map((eachProduct) => {
+          return (
+            <Link
+              className="m-4"
+              to={`/products/detail/${eachProduct._id}`}
+              key={eachProduct._id}
+            >
+              <Product detail={false} product={eachProduct} />
+            </Link>
+          );
+        })}
+      </CardGroup>
     </div>
   );
 }

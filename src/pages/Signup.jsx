@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { uploadImageService } from "../services/upload.services";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Signup() {
   const navigate = useNavigate();
@@ -76,54 +78,70 @@ function Signup() {
     <div>
       <h1>Signup</h1>
 
-      <form onSubmit={handleSignup} encType="multipart/form-data">
-        <label>Name:</label>
-        <input
+      <Form className="app-form" onSubmit={handleSignup} encType="multipart/form-data">
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Name:</Form.Label>
+        <Form.Control
           type="name"
           name="name"
           value={name}
           onChange={handleNameChange}
         />
+        </Form.Group>
+
         <br />
-        <label>Last Name:</label>
-        <input
+        <Form.Group className="mb-3" controlId="formBasicLastName">
+        <Form.Label>Last Name:</Form.Label>
+        <Form.Control
           type="lastname"
           name="lastname"
           value={lastname}
           onChange={handleLastnameChange}
         />
+        </Form.Group>
 
         <br />
-        <label>Email:</label>
-        <input
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
           type="email"
           name="email"
           value={email}
           onChange={handleEmailChange}
         />
+        </Form.Group>
 
         <br />
-        <label>Password:</label>
-        <input
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password"
           name="password"
           value={password}
           onChange={handlePasswordChange}
         />
+        </Form.Group>
         <br />
-        <label htmlFor="userImage">Imagen</label>
-        <input
+
+        <Form.Group className="mb-3" controlId="formBasicUserImage">
+        <Form.Label htmlFor="userImage">Imagen:</Form.Label>
+        <Form.Control
           type="file"
           name="userImage"
           onChange={handleUploadImageProfile}
         />
+         <Form.Text className="text-muted">
+          No olvide subir su foto de perfil
+        </Form.Text>
+         </Form.Group>
 
         <br />
 
-        <button type="submit">Signup</button>
+        <Button variant="outline-success" type="submit">Signup</Button>
 
         {errorMessage !== "" ? <p>{errorMessage}</p> : null}
-      </form>
+      </Form>
     </div>
   );
 }

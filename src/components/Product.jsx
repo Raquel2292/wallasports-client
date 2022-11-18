@@ -1,14 +1,29 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
 
 function Product(props) {
   return (
-    <div className="card">
-    <img src={props.product.productImage} alt={props.product.name} />
-      <p>{props.product.name}</p>
-      <p>{props.product.price}€</p>
-      <p> {props.detail === true ? props.product.description : null}</p>  {/* para que el detalle me aparezca solo en el detalle del producto*/ }
-     
-    </div>
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src={props.product.productImage} />
+      <Card.Body>
+        <Card.Title>
+          {props.product.name}
+          <Card.Text>
+            {props.product.price}€
+            {props.product.reserved && (
+              <Badge className="m-1" pill bg="info">
+                Reservado
+              </Badge>
+            )}
+          </Card.Text>
+        </Card.Title>
+
+        {props.detail === true ? (
+          <Card.Text>{props.product.description}</Card.Text>
+        ) : null}
+      </Card.Body>
+    </Card>
   );
 }
 

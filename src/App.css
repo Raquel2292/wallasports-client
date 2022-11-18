@@ -1,28 +1,22 @@
-
 .App {
   text-align: center;
+  background-color: #eceff1;
 }
 
-.card {
-  border: 1px solid gray;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 20px 0;
+html {
+  background-color: #eceff1;
 }
 
-.card img {
-  width: 300px;
-}
-
-.card-home {
-  border: 1px solid gray;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 20px 40vw;
+.home-image {
+  background-image: url("../public/imageHome.webp");
+  width: 100%;
+  height: 600px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  text-decoration: none;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
 }
 
 .h1-home {
@@ -30,8 +24,132 @@
   font-family: sans-serif;
 }
 
+.navbar-brand {
+  color: #58957c;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 23px;
+}
+
+.home-text {
+  color: wheat;
+}
+
+.home-text h3{
+  text-shadow: 2px 2px black;
+}
+
+.home-text h1{
+  text-shadow: 2px 2px black;
+}
+
+.home-text p{
+  text-shadow: 2px 2px black;
+}
+
+.title-links {
+  color: #58957c;
+  padding-top: 50px;
+}
+
+.card-home {
+  color: #58957c;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.home-links {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+}
+
+.profile {
+  padding-top: 100px;
+  color: #58957c;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.profile h4 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button-profile {
+  margin: 10px;
+}
+
+.pageTitle {
+  color: #58957c;
+  margin: 40px 0px;
+}
+
+.app-form {
+  width: 95%;
+  background-color: white;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 500px;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.app-form button {
+  margin-top: 20px;
+}
+
+.card-group {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.card-group a {
+  color: #58957c;
+  text-decoration: none;
+}
+
 .message {
+  background-color: white;
   border: 1px solid grey;
   margin: 20px;
   padding: 20px;
+  border-radius: 20px;
+  box-shadow: 5px 5px lightgray;
+}
+
+.image-material {
+  background-image: "https://thumbs.dreamstime.com/z/pelota-de-tenis-que-golpea-la-red-del-en-el-campo-126592553.jpg";
+}
+
+.mb-3 {
+  display: block;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 600px) {
+  /*CSS de mayor a una pantallade movil*/
+  .home-links {
+    flex-direction: row;
+  }
+
+  .card-home {
+    margin-bottom: 0px;
+  }
+
+  .card {
+    max-width: 500px;
+  }
 }
