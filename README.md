@@ -1,70 +1,187 @@
-# Getting Started with Create React App
+# WALLASPORTS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+    Wallasports es una aplicación web donde podrás encontrar los productos deportivos que anuncian otros usuarios, así como poder anunciar los tuyos propios. Contacta con otros usuarios, a través de mensajes directos.
 
-## Available Scripts
 
-In the project directory, you can run:
+## User Stories
 
-### `npm start`
+-  **/error:** Pantalla de error URL no encontrada
+-  **/signup:** Pantalla de registro
+-  **/login:** Pantalla de inicio de sesión
+-  **/** Pantalla de Home
+-  **/profile** Pantalla de Perfil
+-  **/productsList/:type** Pantalla de lista de productos por el tipo de producto
+-  **/products/detail/:id** Pantalla de detalles del producto que quieres ver
+-  **/upload** Pantalla de subir tu producto
+-  **/favorites** Pantalla de tus favoritos
+- **/my-products** Pantalla de mis productos
+- **/edit-products/:id** Pantalla de editar productos
+- **/edit-profile** Pantalla de editar perfil
+- **/messages** Pantalla de mensajes
+  
+# Client
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Routes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- / - Homepage
+- /auth/signup - Registrarse
+- /auth/login - Iniciar sesion
+- /profile - Perfil
+- /productsList/:type - lista de productos 
+- /products/detail/:id - lista de detalles
+- /upload -subir producto
+- favorites -favoritos
+- /my-products - mis productos
+- /edit-products/:id - editar producto
+- /edit-profile - editar perfil
+- /messages' - mensajes
+- 404
 
-### `npm test`
+## Pages
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Detail (user only)
+- EditProduct (user only)
+- EditProfile (user only)
+- Favorites(user only)
+- Home (user only)
+- Login (public only)
+- Messages (user only)
+- MyProducts (user only)
+- ProductsList (user only)
+- Profile (user only)
+- Signup (public only)
+- Upload (user only)
+- 404 Page (public)
 
-### `npm run build`
+## Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- IsPrivate
+- List
+- NavbarHome
+- Product
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## IO
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Services
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Auth Service
+  - auth.signupService(newUser)
+  - auth.loginService(userCredentials)
+  - auth.deleteProfile(id)
+  - auth.editProfile(id)
+  - auth.verifyService() 
+- Messages Service
+  - messages.getMessages()
+  - messages.sendMessage(productId, newMessage)
+- Product Service
+  - product.getAllProductService(type)
+  - product.uploadProduct(newProduct)
+  - product.getProductDetailsService(id)
+  - product.updateProductService(id, productChanges)
+  - product.getAllUserProducts(userId)
+  - product.getFavorites()
+  - product.addFavorite(productId)
+  - product.deleteFavorite(productId)
+- Upload Service
+  - upload.uploadImageService(imageFile)
+  - messages.uploadProductImage(productImage)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Models
 
-## Learn More
+User model
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+username - String // required
+lastname - String // requires
+email - String // required & unique
+userImage - String
+password - String // required
+favorites
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Products model
 
-### Code Splitting
+```
+name - String // required
+description - String // required
+price - Number // required
+productImage - String // required
+type - String // enum
+reserved - Boolean
+owner 
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Messages model
 
-### Analyzing the Bundle Size
+```
+userTo - String 
+userFrom - String 
+product - String 
+text - String 
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## API Endpoints/Backend Routes
 
-### Making a Progressive Web App
+- POST /login
+- POST /signup
+  - body:
+    - name
+    - lastname
+    - email
+    - password
+    - userImage
+- POST /auth/:editId
+  - body:
+    - name
+    - email
+- Delete /auth/:deleteId
+- GET /verify
+- GET /
+- POST /:productId
+- POST /upload
+  - body:
+    - name
+    - description
+    - price
+    - type
+    - reserved
+    - productImage
+    - owner
+- GET /list/:type
+- GET /owner/:userId
+- GET /favorites
+- PATCH /add-favorites/:idProduct
+- PATCH /delete-favorites/:idProduct
+- GET /detail/:id
+- DELETE /:deleteId
+- PATCH /:editId
+    - body: 
+        - name
+        - desciption
+        - price
+        - reserved
+        - productImage
+- POST /productImage
+  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Links
 
-### Advanced Configuration
+### Git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The url to your repository and to your deployed project
 
-### Deployment
+[Client repository Link] (https://github.com/Raquel2292/wallasports-client)
+[Server repository Link](https://github.com/Raquel2292/wallasports-server)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[Deploy Link](https://wallasports.netlify.app/)
 
-### `npm run build` fails to minify
+### Slides
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The url to your presentation slides
+
+[Slides Link](https://www.canva.com/design/DAFSSfArJR4/1Fg-AK8XIE8a1lugoIHVQQ/edit)
